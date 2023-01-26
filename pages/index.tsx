@@ -1,10 +1,15 @@
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Layout from "@/components/layoutComponents/Layout";
 import { PestIntroduction, PestLandingSection, PestServices } from "@/components/pestServicesComponents/sections";
+import { CgFileDocument } from "react-icons/cg";
 import { server } from "@/config";
 import { ContactType, ServiceProps, Services } from "@/types/Global.types";
+import Pdfs from "@/components/pestServicesComponents/widgets/Pdfs";
 
 const Home = ({ services }: ServiceProps) => {
+  const [showPdfs, setShowPdfs] = useState(false);
+
   return (
     <>
       <Head>
@@ -20,6 +25,10 @@ const Home = ({ services }: ServiceProps) => {
         <PestLandingSection />
         <PestIntroduction />
         <PestServices services={services} />
+        <button className="pdf" onClick={() => setShowPdfs(!showPdfs)}>
+          <CgFileDocument className="pdfIcon" />
+        </button>
+        {showPdfs && <Pdfs setShowPdfs={setShowPdfs} />}
       </Layout>
     </>
   );

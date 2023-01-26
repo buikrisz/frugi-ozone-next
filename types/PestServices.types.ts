@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { Dispatch, SetStateAction } from "react";
 
 export type ShowDetailsState = {
   id: number;
@@ -18,4 +19,8 @@ export type PestServiceDetails = {
   title: string;
   text: string;
   setShowDetails: React.Dispatch<React.SetStateAction<ShowDetailsState>>;
+};
+
+export type PdfProps = {
+  setShowPdfs: Dispatch<SetStateAction<boolean>>;
 };
