@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import apiKey from "@/emailkey";
 import emailjs from "@emailjs/browser";
 import cities from "@/data/hu.json";
 import LandingFormAutocomplete from "./LandingFormAutocomplete";
-import landingFormStyles from "@/styles/globalStyles/LandingForm.module.css";
 import { LandingFormValue } from "@/types/Global.types";
+import landingFormStyles from "@/styles/globalStyles/LandingForm.module.css";
 
 const LandingForm = () => {
   const [formValue, setFormValue] = useState<LandingFormValue>({
@@ -20,24 +20,31 @@ const LandingForm = () => {
   const [serviceFocus, setServiceFocus] = useState(false);
 
   const [locationClicked, setLocationClicked] = useState(false);
-  const [serviceClicked, setServiceClicked] = useState(false);
+  const [serviceClicked, setServiceClicked] = useState(false); //TODO click anywhere else should close dropdown
 
-  const cityNames = cities.map((city) => city.city);
+  const cityNames = useMemo(() => cities.map((city) => city.city), []);
   const services = ["Kártevőirtás", "Fertőtlenítés", "Egyéb"];
-  /* const [districtClicked, setDistrictClicked] = useState(false);
-    const districts = ["I.","II.","III.","IV.","V.","VI.","VII.","VIII.","IX.","X.","XI.","XII.","XIII.","XIV.","XV.","XVI.","XVII.","XVIII.","XIX.","XX.","XXI.","XXII.","XXIII."]; */
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setFormValue({
-      ...formValue,
-      [name]: type === "checkbox" ? checked : value,
-    });
-    name === "location" && setLocationClicked(false);
-    name === "service" && setServiceClicked(false);
-  };
+  //TODO add districts
+  //const [districtClicked, setDistrictClicked] = useState(false);
+  //const districts = ["I.","II.","III.","IV.","V.","VI.","VII.","VIII.","IX.","X.","XI.","XII.","XIII.","XIV.","XV.","XVI.","XVII.","XVIII.","XIX.","XX.","XXI.","XXII.","XXIII."];
 
-  const handleFocus = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value, type, checked } = e.target;
+
+      setFormValue({
+        ...formValue,
+        [name]: type === "checkbox" ? checked : value,
+      });
+
+      if (name === "location") setLocationClicked(false);
+      if (name === "service") setServiceClicked(false);
+    },
+    [formValue]
+  );
+
+  const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement, Element>) => {
     const { name } = e.target;
     if (name === "service") {
       setServiceFocus(true);
@@ -49,7 +56,12 @@ const LandingForm = () => {
       setServiceFocus(false);
       setLocationFocus(false);
     }
-  };
+  }, []);
+
+  const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+  }, []);
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [mailSent, setMailSent] = useState(false);
@@ -58,7 +70,7 @@ const LandingForm = () => {
   useEffect(() => {
     if (formSubmitted) {
       setAnimationStarted(true);
-      console.log(formValue.district);
+
       emailjs
         .send(
           apiKey.SERVICE_ID,
@@ -80,17 +92,11 @@ const LandingForm = () => {
           console.log(err);
         });
     }
-  }, [formSubmitted, formValue.district, formValue.location, formValue.name, formValue.phone, formValue.service]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formSubmitted]);
 
   return !mailSent && !animationStarted ? (
-    <form
-      className={landingFormStyles.landingForm}
-      autoComplete="off"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setFormSubmitted(true);
-      }}
-    >
+    <form className={landingFormStyles.landingForm} autoComplete="off" onSubmit={onSubmit}>
       <h2>Kérjen visszahívást:</h2>
       <input type="text" name="name" id="name" placeholder="Név" value={formValue.name} onChange={handleChange} onFocus={handleFocus} required />
       <input type="text" name="phone" id="phone" placeholder="Telefonszám" value={formValue.phone} onChange={handleChange} onFocus={handleFocus} required />
@@ -162,9 +168,9 @@ const LandingForm = () => {
     </form>
   ) : !mailSent && animationStarted ? (
     <form className={landingFormStyles.landingForm}>
-      <svg className={landingFormStyles.loader} viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <circle className="internal-circle" cx="60" cy="60" r="30"></circle>
-        <circle className="external-circle" cx="60" cy="60" r="50"></circle>
+      <svg className="loader" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle className="internalCircle" cx="60" cy="60" r="30"></circle>
+        <circle className="externalCircle" cx="60" cy="60" r="50"></circle>
       </svg>
     </form>
   ) : (
