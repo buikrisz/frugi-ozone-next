@@ -29,7 +29,7 @@ const LandingFormAutocomplete = ({
         formValue[formInput].length >= minLength &&
         !clicked &&
         focus &&
-        autoCompleteValues.map((autoCompleteValue, index) => {
+        autoCompleteValues?.map((autoCompleteValue, index) => {
           if (autoCompleteValue.toLowerCase().includes(formValue[formInput].toLowerCase())) {
             return (
               <h6 key={index} className={landingFormStyles.autocompleteListItem} onClick={() => onClick(autoCompleteValue)}>

@@ -22,7 +22,7 @@ const LandingForm = () => {
   const [locationClicked, setLocationClicked] = useState(false);
   const [serviceClicked, setServiceClicked] = useState(false); //TODO click anywhere else should close dropdown
 
-  const cityNames = useMemo(() => cities.map((city) => city.city), []);
+  const cityNames = useMemo(() => cities?.map((city) => city.city), []);
   const services = ["Kártevőirtás", "Fertőtlenítés", "Egyéb"];
 
   //TODO add districts
