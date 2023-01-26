@@ -1,0 +1,193 @@
+.landingForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #fff;
+  height: 600px;
+  width: 500px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px 0px rgb(200, 200, 200);
+}
+
+.landingForm h2 {
+  width: 100%;
+  font-size: 25px;
+  color: #010252;
+  text-align: center;
+}
+
+.landingForm input {
+  height: 60px;
+  width: 80%;
+  padding-left: 20px;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 10px;
+}
+
+.landingForm .locationDiv,
+.landingForm .serviceDiv {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  width: 80%;
+}
+
+.landingForm div input {
+  width: 100%;
+}
+
+.landingForm div .landingFormAutocomplete {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  bottom: 0;
+  transform: translateY(100%);
+  width: 100%;
+  max-height: 120px;
+  overflow-y: auto;
+  z-index: 2;
+}
+
+.landingForm div .landingFormAutocomplete .autocompleteListItem {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding-left: 20px;
+  font-size: 12px;
+  border-top: 1px solid #010252;
+  cursor: pointer;
+}
+
+.landingForm div .landingFormAutocomplete .autocompleteListItem:nth-child(1) {
+  border-top: unset;
+}
+
+.landingForm .landingFormAutocomplete .autocompleteListItem:hover {
+  background-color: #edf9f4;
+}
+
+.landingForm input::placeholder {
+  color: #c8c8c8;
+}
+
+.landingForm .landingFormCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 80%;
+}
+
+.landingForm .landingFormCheckbox input {
+  height: 20px;
+  width: 20px;
+  padding-left: unset;
+}
+
+.landingForm .landingFormCheckbox label {
+  font-size: 16px;
+}
+
+.landingForm .landingFormButtons {
+  display: flex;
+  justify-content: center;
+  gap: 4%;
+  width: 80%;
+}
+
+.landingForm .landingFormButtons .callMe {
+  background-color: #34b74a;
+  height: 60px;
+  width: 100%;
+  padding: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.landingForm .landingFormButtons .makeCall {
+  display: none;
+}
+
+.landingForm .landingFormButtons .callMe:hover,
+.landingForm .landingFormButtons .makeCall:hover {
+  background-color: #308f3f;
+}
+
+.landingForm .linkToPrivacyPolicy {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #0000ee;
+}
+
+@media (max-width: 820px) {
+  .landingForm {
+    width: 80%;
+  }
+
+  .landingForm h2 {
+    font-size: 24px;
+  }
+
+  .landingForm input {
+    height: 60px;
+    font-size: 16px;
+  }
+
+  .landingForm .locationDiv {
+    height: 60px;
+  }
+
+  .landingForm .landingFormButtons .callMe {
+    width: 50%;
+    font-size: 16px;
+  }
+
+  .landingForm .landingFormButtons .makeCall {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #34b74a;
+    height: 60px;
+    width: 50%;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 10px;
+    transition: 0.5s;
+  }
+}
+
+@media (max-width: 450px) {
+  .landingForm {
+    width: 325px;
+    margin-bottom: 10px;
+  }
+
+  .landingForm h2 {
+    font-size: 20px;
+  }
+
+  .landingForm input {
+    height: 50px;
+    font-size: 14px;
+  }
+
+  .landingForm .locationDiv {
+    height: 50px;
+  }
+
+  .landingForm .landingFormButtons .callMe,
+  .landingForm .landingFormButtons .makeCall {
+    height: 50px;
+    font-size: 14px;
+  }
+
+  .landingForm .landingFormCheckbox label {
+    font-size: 13px;
+  }
+}
