@@ -42,7 +42,7 @@
   padding: 5px 10px;
 }
 
-.headerLinksSelected {
+.headerLinks.headerLinkSelected {
   background-color: #54557e;
   border-radius: 10px;
 }

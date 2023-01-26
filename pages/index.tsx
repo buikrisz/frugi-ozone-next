@@ -1,10 +1,8 @@
-import ContactSection from "@/components/globalComponents/sections/Contact";
 import Layout from "@/components/layoutComponents/Layout";
 import { PestIntroduction } from "@/components/pestServicesComponents/sections/PestIntroduction";
 import PestLandingSection from "@/components/pestServicesComponents/sections/PestLanding";
 import PestServices from "@/components/pestServicesComponents/sections/PestServices";
 import { ContactType } from "@/types/Global.types";
-import { ServiceTypeEnum } from "@/types/Layout.types";
 import Head from "next/head";
 
 const Home = () => {
@@ -19,11 +17,10 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout serviceType={ServiceTypeEnum.PEST}>
+      <Layout contactType={ContactType.PEST}>
         <PestLandingSection />
         <PestIntroduction />
         <PestServices />
-        <ContactSection contactType={ContactType.PEST} />
       </Layout>
     </>
   );

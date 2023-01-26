@@ -1,8 +1,11 @@
+import { useRouter } from "next/router";
 import { BsBug } from "react-icons/bs";
 import Link from "next/link";
 import headerStyles from "@/styles/LayoutStyles/Header.module.css";
 
 const Header = () => {
+  const { pathname } = useRouter();
+
   return (
     <header className={headerStyles.header}>
       <div className={headerStyles.headerTitle}>
@@ -10,17 +13,11 @@ const Header = () => {
         <h4>FrugiOzone Kártevőirtás</h4>
       </div>
       <div>
-        <Link
-          href="/"
-          className={headerStyles.headerLinks} //TODO change on selection
-        >
+        <Link href="/" className={pathname === "/" ? `${headerStyles.headerLinkSelected} ${headerStyles.headerLinks}` : headerStyles.headerLinks}>
           <h4>Rovarirtás</h4>
         </Link>
         <span>|</span>
-        <Link
-          href="/ozone"
-          className={headerStyles.headerLinks} //TODO change on selection
-        >
+        <Link href="/ozone" className={pathname === "/ozone" ? `${headerStyles.headerLinkSelected} ${headerStyles.headerLinks}` : headerStyles.headerLinks}>
           <h4>Ózonos fertőtlenítés</h4>
         </Link>
       </div>

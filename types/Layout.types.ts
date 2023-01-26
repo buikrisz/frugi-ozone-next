@@ -1,8 +1,5 @@
-export enum ServiceTypeEnum {
-  PEST = 1,
-  OZONE,
-}
+import { ContactType } from "./Global.types";
 
 export type ServiceType = {
-  serviceType: ServiceTypeEnum;
+  contactType: ContactType;
 };
