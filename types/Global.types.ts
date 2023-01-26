@@ -37,8 +37,24 @@ export type ContactFormData = {
   contactPrivacyPolicy: boolean;
 };
 
+export enum ContactIcon {
+  LOCATION = 1,
+  PHONE,
+  MAIL,
+}
+
 export type ContactInfoCard = {
-  icon: string;
+  icon: ContactIcon;
   title: string;
   text: string;
+};
+
+export type ContactForm = {
+  formSubmitted: boolean;
+  setFormSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
+  formData: ContactFormData;
+  setFormData: React.Dispatch<React.SetStateAction<ContactFormData>>;
+  setMailSent: React.Dispatch<React.SetStateAction<boolean>>;
+  setAnimationStarted: React.Dispatch<React.SetStateAction<boolean>>;
+  contactType: ContactType;
 };

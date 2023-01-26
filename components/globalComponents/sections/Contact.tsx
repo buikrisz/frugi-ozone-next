@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { ContactForm, ContactInfoCard } from "../widgets";
+import { ContactFormData, ContactIcon, ContactSectionData } from "@/types/Global.types";
 import contactStyles from "@/styles/globalStyles/Contact.module.css";
-import { ContactType, ContactFormData, ContactSectionData } from "@/types/Global.types";
 
 const ContactSection = ({ contactType }: ContactSectionData) => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -20,13 +20,11 @@ const ContactSection = ({ contactType }: ContactSectionData) => {
   return (
     <section id="kapcsolat" className={contactStyles.kapcsolat}>
       <div className={contactStyles.contactInfo}>
-        <h3 itemProp="title" className="title">
-          Kapcsolat
-        </h3>
+        <h3 className={contactStyles.title}>Kapcsolat</h3>
         <div className={contactStyles.contactInfoCards}>
-          <ContactInfoCard icon="location" title="Iroda cím" text="2120, Dunakeszi Mária utca 23." />
-          <ContactInfoCard icon="phone" title="Telefonszám" text="+36-70-338-4734" />
-          <ContactInfoCard icon="mail" title="E-mail cím" text="frugiozone@gmail.com" />
+          <ContactInfoCard icon={ContactIcon.LOCATION} title="Iroda cím" text="2120, Dunakeszi Mária utca 23." />
+          <ContactInfoCard icon={ContactIcon.PHONE} title="Telefonszám" text="+36-70-338-4734" />
+          <ContactInfoCard icon={ContactIcon.MAIL} title="E-mail cím" text="frugiozone@gmail.com" />
         </div>
       </div>
       <div className={contactStyles.formInfo}>
@@ -43,8 +41,8 @@ const ContactSection = ({ contactType }: ContactSectionData) => {
         ) : !mailSent && animationStarted ? (
           <form className={contactStyles.contactForm}>
             <svg className="loader" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-              <circle className="internal-circle" cx="60" cy="60" r="30"></circle>
-              <circle className="external-circle" cx="60" cy="60" r="50"></circle>
+              <circle className="internalCircle" cx="60" cy="60" r="30"></circle>
+              <circle className="externalCircle" cx="60" cy="60" r="50"></circle>
             </svg>
           </form>
         ) : (

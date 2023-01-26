@@ -1,34 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import apiKey from "@/emailkey";
 import emailjs from "@emailjs/browser";
+import { ContactForm, ContactType } from "@/types/Global.types";
 import contactStyles from "@/styles/globalStyles/Contact.module.css";
-import { ContactFormData, ContactType } from "@/types/Global.types";
-
-export type ContactForm = {
-  formSubmitted: boolean;
-  setFormSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
-  formData: ContactFormData;
-  setFormData: React.Dispatch<React.SetStateAction<ContactFormData>>;
-  setMailSent: React.Dispatch<React.SetStateAction<boolean>>;
-  setAnimationStarted: React.Dispatch<React.SetStateAction<boolean>>;
-  contactType: ContactType;
-};
 
 const ContactForm = ({ formSubmitted, setFormSubmitted, formData, setFormData, setMailSent, setAnimationStarted, contactType }: ContactForm) => {
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
-  };
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+      if (e.target instanceof HTMLInputElement) {
+        const { name, value, type, checked } = e.target;
+        setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
+      } else {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+      }
+    },
+    [formData, setFormData]
+  );
 
-  const handleSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const onSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setFormSubmitted(true);
+    },
+    [setFormSubmitted]
+  );
 
   useEffect(() => {
     if (formSubmitted) {
@@ -46,7 +42,7 @@ const ContactForm = ({ formSubmitted, setFormSubmitted, formData, setFormData, s
           },
           apiKey.PUBLIC_KEY
         )
-        .then((res) => {
+        .then(() => {
           console.log("Email sent");
           setMailSent(true);
         })
@@ -58,30 +54,17 @@ const ContactForm = ({ formSubmitted, setFormSubmitted, formData, setFormData, s
   }, [formSubmitted]);
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setFormSubmitted(true);
-      }}
-    >
+    <form onSubmit={onSubmit}>
       <h2>Lépjen kapcsolatba velünk</h2>
       <div>
-        <input
-          type="text"
-          name="contactName"
-          id={contactStyles.contactName}
-          placeholder="Név"
-          value={formData.contactName}
-          onChange={handleInputChange}
-          required
-        />
+        <input type="text" name="contactName" id={contactStyles.contactName} placeholder="Név" value={formData.contactName} onChange={handleChange} required />
         <input
           type="text"
           name="contactPhone"
           id={contactStyles.contactPhone}
           placeholder="Telefonszám"
           value={formData.contactPhone}
-          onChange={handleInputChange}
+          onChange={handleChange}
           required
         />
       </div>
@@ -92,7 +75,7 @@ const ContactForm = ({ formSubmitted, setFormSubmitted, formData, setFormData, s
           id={contactStyles.contactMail}
           placeholder="E-mail"
           value={formData.contactMail}
-          onChange={handleInputChange}
+          onChange={handleChange}
           required
         />
         {contactType === ContactType.PEST ? (
@@ -101,7 +84,7 @@ const ContactForm = ({ formSubmitted, setFormSubmitted, formData, setFormData, s
             id={contactStyles.contactService}
             className={formData.contactService === "" ? "unselected" : "selected"}
             value={formData.contactService}
-            onChange={handleSelectionChange}
+            onChange={handleChange}
           >
             <option value="" disabled hidden>
               Szolgáltatások...
@@ -120,7 +103,7 @@ const ContactForm = ({ formSubmitted, setFormSubmitted, formData, setFormData, s
             id={contactStyles.contactService}
             className={formData.contactService === "" ? "unselected" : "selected"}
             value={formData.contactService}
-            onChange={handleSelectionChange}
+            onChange={handleChange}
           >
             <option value="" disabled hidden>
               Milyen fertőtlenítés...
@@ -142,7 +125,7 @@ const ContactForm = ({ formSubmitted, setFormSubmitted, formData, setFormData, s
         rows={10}
         placeholder="Üzenet..."
         value={formData.contactMessage}
-        onChange={handleTextareaChange}
+        onChange={handleChange}
         required
       />
       <div className={contactStyles.contactFormCheckbox}>
@@ -151,7 +134,7 @@ const ContactForm = ({ formSubmitted, setFormSubmitted, formData, setFormData, s
           name="contactPrivacyPolicy"
           id={contactStyles.contactPrivacyPolicy}
           checked={formData.contactPrivacyPolicy}
-          onChange={handleInputChange}
+          onChange={handleChange}
           required
         />
         <label htmlFor="contactPrivacyPolicy">
