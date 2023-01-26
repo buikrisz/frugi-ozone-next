@@ -1,0 +1,64 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  padding: 0 50px;
+  background-color: #010252;
+  color: #fff;
+  z-index: 10;
+}
+
+.header .backArrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px 200px;
+  background-image: url("../../images/landing_bg.jpg");
+}
+
+.content h2 {
+  width: 100%;
+  border-bottom: 1px solid #010252;
+  font-size: 40px;
+}
+
+.content div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.content div h4 {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.content div a {
+  padding-left: 30px;
+  font-style: italic;
+}
+
+.content div a:hover {
+  text-decoration: underline;
+}
+
+.content div .iconAnchorContainer {
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 90%;
+}
+
+.content div .iconAnchorContainer .iconAnchors {
+  width: 500px;
+}

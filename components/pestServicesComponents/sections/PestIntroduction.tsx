@@ -5,6 +5,7 @@ import about_us from "@/images/about_us.jpg";
 import tools from "@/images/tools.jpg";
 import Image from "next/image";
 import pestIntroductionStyles from "@/styles/pestServicesStyles/PestIntroduction.module.css";
+import Link from "next/link";
 
 const PestIntroduction = () => {
   const [showTools, setShowTools] = useState(false);
@@ -49,9 +50,9 @@ const PestIntroduction = () => {
             <BsCheck2Circle className={pestIntroductionStyles.check} />
             <h4>
               Hatékony, környezetbarát szereket használunk a rovarírtáshoz, melyeknek biztonsági adatlapjait{" "}
-              <a href="/dokumentumok.html" className={pestIntroductionStyles.linkToDocs}>
+              <Link href="/dokumentumok" className={pestIntroductionStyles.linkToDocs}>
                 itt
-              </a>{" "}
+              </Link>{" "}
               találhatják meg
             </h4>
           </div>

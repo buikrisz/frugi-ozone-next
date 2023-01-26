@@ -1,5 +1,6 @@
 import { BsInstagram, BsFacebook } from "react-icons/bs";
 import footerStyles from "@/styles/LayoutStyles/Footer.module.css";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -12,7 +13,7 @@ const Footer = () => {
       </a>
       <h4>|</h4>
       <div className={footerStyles.footerLinks}>
-        <a href="/dokumentumok#ikonok">Ikon gyűjtemény</a> {/* TODO link? */}
+        <Link href="/dokumentumok">Ikon gyűjtemény</Link>
         {/* <a href='/dokumentumok#biztonsagi'>Biztonsági adatlapok</a> */}
         <a href="/adatvedelmi">Adatvédelmi nyilatkozat</a> {/* TODO link? */}
       </div>
