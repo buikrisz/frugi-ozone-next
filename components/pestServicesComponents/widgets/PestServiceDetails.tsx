@@ -1,34 +1,23 @@
-import { FaTimes } from "react-icons/fa";
+import { useCallback } from "react";
 import Image from "next/image";
-import pestServiceDetailStyles from "@/styles/pestServicesStyles/PestServiceDetail.module.css";
+import { FaTimes } from "react-icons/fa";
 import { PestServiceDetails } from "@/types/PestServices.types";
-import React, {
-  DetailedHTMLProps,
-  HTMLAttributes,
-  MouseEventHandler,
-} from "react";
+import pestServiceDetailStyles from "@/styles/pestServicesStyles/PestServiceDetail.module.css";
 
-const PestServiceDetails = ({
-  img,
-  title,
-  text,
-  setShowDetails,
-}: PestServiceDetails) => {
-  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    (e.target as Element).classList.contains(
-      pestServiceDetailStyles.serviceDetailsBg
-    ) && setShowDetails({ show: false, id: 0 });
-  };
+const PestServiceDetails = ({ img, title, text, setShowDetails }: PestServiceDetails) => {
+  const handleCloseOnBackground = useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      (e.target as Element).classList.contains(pestServiceDetailStyles.serviceDetailsBg) && setShowDetails({ show: false, id: 0 });
+    },
+    [setShowDetails]
+  );
+
+  const handleCloseButton = useCallback(() => setShowDetails({ show: false, id: 0 }), [setShowDetails]);
 
   return (
-    <div
-      itemScope
-      itemType="https://schema.org/ProfessionalService"
-      className={pestServiceDetailStyles.serviceDetailsBg}
-      onClick={handleClick}
-    >
+    <div className={pestServiceDetailStyles.serviceDetailsBg} onClick={handleCloseOnBackground}>
       <div className={pestServiceDetailStyles.serviceDetails}>
-        <button onClick={(e) => setShowDetails({ show: false, id: 0 })}>
+        <button onClick={handleCloseButton}>
           <FaTimes className={pestServiceDetailStyles.icon} />
         </button>
         <Image src={img} alt={img.src} />

@@ -5,7 +5,7 @@ export type ShowDetailsState = {
   show: boolean;
 };
 
-export type ServiceCard = {
+export type ServiceCardType = {
   id: number;
   img: StaticImageData;
   title: string;
