@@ -68,3 +68,7 @@ export type Services = {
   intro: string;
   text: string;
 };
+
+export type ServiceProps = {
+  services: Services[];
+};

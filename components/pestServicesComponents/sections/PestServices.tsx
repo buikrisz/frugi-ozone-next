@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { PestServiceCard, PestServiceDetails } from "../widgets";
 import { ShowDetailsState } from "@/types/PestServices.types";
-import { Services } from "@/types/Global.types";
+import { ServiceProps } from "@/types/Global.types";
 import pestServicesStyles from "@/styles/pestServicesStyles/PestServices.module.css";
-
-export type ServiceProps = {
-  services: Services[];
-};
 
 const PestServices = ({ services }: ServiceProps) => {
   const [showDetails, setShowDetails] = useState<ShowDetailsState>({

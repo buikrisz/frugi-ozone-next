@@ -6,7 +6,7 @@ import tools from "@/images/tools.jpg";
 import Image from "next/image";
 import pestIntroductionStyles from "@/styles/pestServicesStyles/PestIntroduction.module.css";
 
-export const PestIntroduction = () => {
+const PestIntroduction = () => {
   const [showTools, setShowTools] = useState(false);
 
   const showToolsOnClick = useCallback(() => setShowTools(true), [setShowTools]);
@@ -71,3 +71,5 @@ export const PestIntroduction = () => {
     </section>
   );
 };
+
+export default PestIntroduction;

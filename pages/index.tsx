@@ -1,10 +1,8 @@
-import Layout from "@/components/layoutComponents/Layout";
-import { PestIntroduction } from "@/components/pestServicesComponents/sections/PestIntroduction";
-import PestLandingSection from "@/components/pestServicesComponents/sections/PestLanding";
-import PestServices, { ServiceProps } from "@/components/pestServicesComponents/sections/PestServices";
-import { server } from "@/config";
-import { ContactType, Services } from "@/types/Global.types";
 import Head from "next/head";
+import Layout from "@/components/layoutComponents/Layout";
+import { PestIntroduction, PestLandingSection, PestServices } from "@/components/pestServicesComponents/sections";
+import { server } from "@/config";
+import { ContactType, ServiceProps, Services } from "@/types/Global.types";
 
 const Home = ({ services }: ServiceProps) => {
   return (
