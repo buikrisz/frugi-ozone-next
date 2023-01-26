@@ -1,11 +1,12 @@
 import Layout from "@/components/layoutComponents/Layout";
 import { PestIntroduction } from "@/components/pestServicesComponents/sections/PestIntroduction";
 import PestLandingSection from "@/components/pestServicesComponents/sections/PestLanding";
-import PestServices from "@/components/pestServicesComponents/sections/PestServices";
-import { ContactType } from "@/types/Global.types";
+import PestServices, { ServiceProps } from "@/components/pestServicesComponents/sections/PestServices";
+import { server } from "@/config";
+import { ContactType, Services } from "@/types/Global.types";
 import Head from "next/head";
 
-const Home = () => {
+const Home = ({ services }: ServiceProps) => {
   return (
     <>
       <Head>
@@ -20,10 +21,20 @@ const Home = () => {
       <Layout contactType={ContactType.PEST}>
         <PestLandingSection />
         <PestIntroduction />
-        <PestServices />
+        <PestServices services={services} />
       </Layout>
     </>
   );
+};
+
+export const getStaticProps = async () => {
+  const res = await fetch(`${server}/api/services`);
+
+  const services: Services[] = await res.json();
+
+  return {
+    props: { services },
+  };
 };
 
 export default Home;

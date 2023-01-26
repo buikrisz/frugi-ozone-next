@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export type LandingFormValue = {
   name: string;
   phone: string;
@@ -57,4 +59,12 @@ export type ContactForm = {
   setMailSent: React.Dispatch<React.SetStateAction<boolean>>;
   setAnimationStarted: React.Dispatch<React.SetStateAction<boolean>>;
   contactType: ContactType;
+};
+
+export type Services = {
+  id: number;
+  img: StaticImageData;
+  title: string;
+  intro: string;
+  text: string;
 };

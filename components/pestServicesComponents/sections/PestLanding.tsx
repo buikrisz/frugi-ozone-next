@@ -1,7 +1,7 @@
 import image from "@/images/pest_control.png";
 import Image from "next/image";
-import pestLandingStyles from "@/styles/pestServicesStyles/PestLanding.module.css";
 import { LandingForm } from "@/components/globalComponents/widgets";
+import pestLandingStyles from "@/styles/pestServicesStyles/PestLanding.module.css";
 
 const PestLandingSection = () => {
   return (
