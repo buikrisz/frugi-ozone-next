@@ -62,3 +62,15 @@
 .content div .iconAnchorContainer .iconAnchors {
   width: 500px;
 }
+
+@media (max-width: 1000px) {
+  .content {
+    padding: 20px 50px;
+  }
+}
+
+@media (max-width: 500px) {
+  .content {
+    padding: 15px 30px;
+  }
+}
