@@ -1,0 +1,143 @@
+.root {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url("../../images/landing_bg.jpg");
+  background-repeat: repeat-y;
+}
+
+.nav {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 200px;
+  background-color: #010252;
+  color: #fff;
+  overflow: auto;
+}
+
+.nav .menuItems {
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+}
+
+.nav .menuItems a {
+  display: flex;
+  align-items: center;
+  padding-left: 40px;
+  height: 60px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.nav .menuItems a:hover {
+  background-color: #25265c;
+  color: rgba(255, 255, 255, 1);
+}
+
+.nav .menuItems section h4 {
+  margin-top: 20px;
+  padding-left: 20px;
+  height: 40px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.nav .backArrow {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 30px;
+}
+
+.nav .menuIcon {
+  display: none;
+  position: absolute;
+  width: 30px;
+  top: 20px;
+  left: 10px;
+  font-size: 30px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-height: 100vh;
+  width: 90%;
+  padding-top: 40px;
+  padding-left: 200px;
+}
+
+.content section {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px 5px #c8c8c8;
+  background-color: #fff;
+  color: #010252;
+  transition: 0.2s;
+}
+
+.content section .content_details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.content section .content_details h4 {
+  font-weight: 400;
+}
+
+@media (max-width: 800px) {
+  .nav {
+    width: 50px;
+  }
+
+  .nav.open {
+    transition: 0.3s;
+    width: 200px;
+  }
+
+  .nav .menuItems {
+    display: none;
+  }
+
+  .nav .menuItems.open {
+    display: block;
+  }
+
+  .nav .backArrow {
+    display: none;
+  }
+
+  .nav .backArrow.open {
+    display: block;
+  }
+
+  .nav .menuIcon {
+    display: block;
+  }
+
+  .nav .menuIcon.open {
+    left: unset;
+    right: 20px;
+  }
+
+  .content {
+    padding-left: 50px;
+  }
+
+  .content section .content_title {
+    text-align: center;
+  }
+}

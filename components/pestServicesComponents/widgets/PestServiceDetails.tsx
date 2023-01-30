@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FaTimes } from "react-icons/fa";
 import { PestServiceDetails } from "@/types/PestServices.types";
 import pestServiceDetailStyles from "@/styles/pestServicesStyles/PestServiceDetail.module.css";
+import Link from "next/link";
 
 const PestServiceDetails = ({ img, title, text, setShowDetails }: PestServiceDetails) => {
   const handleCloseOnBackground = useCallback(
@@ -23,7 +24,7 @@ const PestServiceDetails = ({ img, title, text, setShowDetails }: PestServiceDet
         <Image src={img} alt={img.src} />
         <h4 itemProp="name">{title}</h4>
         <h6 itemProp="description">{text}</h6>
-        <a href="/szolgaltatasok.html">További információk</a>
+        <Link href="/szolgaltatasok">További információk</Link>
       </div>
     </div>
   );
